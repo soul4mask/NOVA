@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10110f">
+    <meta name="description" content="A beautiful, personal streaming home for your Jellyfin library.">
+    <title>NOVA — your library, in orbit</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <svg class="icon-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 1.8 7.2L21 11l-7.2 1.8L12 20l-1.8-7.2L3 11l7.2-1.8L12 2Z"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z"/></symbol>
+      <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 8h4m-4 8h4m10-8h4m-4 8h4"/></symbol>
+      <symbol id="i-tv" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m8 2 4 3 4-3M8 22h8"/></symbol>
+      <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7V5Z"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5h3v14H8zM15 5h3v14h-3z"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+      <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01M11 7h6m-6 10h6"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm4 4a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/></symbol>
+      <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="m18 14 4 4-4 4m0-20 4 4-4 4M2 7h3c5 0 7 10 12 10h5M2 17h3c2 0 3.5-2 5-4m3-4c1.2-1.3 2.4-2 4-2h5"/></symbol>
+      <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4m14-1v2a3 3 0 0 1-3 3H3"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    </svg>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#" data-route="home" aria-label="NOVA home">
+          <span class="brand-mark"><svg class="icon"><use href="#i-spark"></use></svg></span>
+          <span>NOVA</span>
+        </a>
+        <div class="nav-group">
+          <span class="nav-label">YOUR SPACE</span>
+          <nav class="primary-nav">
+            <button class="nav-item active" type="button" data-route="home" aria-label="Discover" aria-current="page"><svg class="icon"><use href="#i-home"></use></svg><span>Discover</span></button>
+            <button class="nav-item" type="button" data-route="movies" aria-label="Movies"><svg class="icon"><use href="#i-film"></use></svg><span>Movies</span></button>
+            <button class="nav-item" type="button" data-route="series" aria-label="Series"><svg class="icon"><use href="#i-tv"></use></svg><span>Series</span></button>
+            <button class="nav-item" type="button" data-route="music" aria-label="Music"><svg class="icon"><use href="#i-music"></use></svg><span>Music</span></button>
+            <button class="nav-item" type="button" data-route="favorites" aria-label="My list"><svg class="icon"><use href="#i-heart"></use></svg><span>My list</span></button>
+          </nav>
+        </div>
+        <div class="sidebar-bottom">
+          <div class="sidebar-note">
+            <span class="note-orb"><svg class="icon"><use href="#i-spark"></use></svg></span>
+            <p>Your stories.<br><strong>Your own orbit.</strong></p>
+            <span class="note-caption">A little more personal.</span>
+          </div>
+          <button class="server-button" type="button" data-action="connect">
+            <span class="server-icon"><svg class="icon"><use href="#i-server"></use></svg></span>
+            <span class="server-copy"><strong id="server-button-title">Connect server</strong><small id="server-button-subtitle">Bring your library home</small></span>
+            <span class="connection-dot" id="connection-dot"></span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="mobile-brand"><span class="brand-mark"><svg class="icon"><use href="#i-spark"></use></svg></span>NOVA</div>
+          <div class="topbar-spacer"></div>
+          <label class="search-wrap">
+            <svg class="icon"><use href="#i-search"></use></svg>
+            <input id="search-input" type="search" placeholder="Search your library" autocomplete="off" aria-label="Search your library">
+            <kbd>/</kbd>
+          </label>
+          <button class="profile-button" id="profile-button" type="button" data-action="connect" aria-label="Connect to Jellyfin">
+            <span class="avatar" id="profile-avatar">N</span><span class="profile-name" id="profile-name">Guest</span><svg class="icon profile-chevron"><use href="#i-chevron"></use></svg>
+          </button>
+        </header>
+
+        <section class="page-view" id="home-view" aria-live="polite"></section>
+        <section class="page-view hidden" id="browse-view" aria-live="polite"></section>
+        <section class="page-view hidden" id="search-view" aria-live="polite"></section>
+        <section class="page-view hidden" id="music-view" aria-live="polite"></section>
+        <footer class="footer"><span>NOVA <span class="footer-dot">•</span> A home for the things you love.</span><span>Powered by Jellyfin</span></footer>
+      </main>
+    </div>
+
+    <section class="audio-dock hidden" id="audio-dock" aria-label="Music player">
+      <div class="audio-track">
+        <div class="audio-artwork" id="audio-artwork"><svg class="icon" aria-hidden="true"><use href="#i-music"></use></svg></div>
+        <div class="audio-track-copy">
+          <strong id="audio-track-title">Nothing playing</strong>
+          <span id="audio-track-artist"></span>
+          <span class="audio-status" id="audio-status" role="status"></span>
+        </div>
+      </div>
+      <div class="audio-controls">
+        <div class="audio-buttons">
+          <button class="audio-control" type="button" data-action="audio-shuffle" aria-label="Shuffle off" aria-pressed="false" title="Shuffle off"><svg class="icon" aria-hidden="true"><use href="#i-shuffle"></use></svg></button>
+          <button class="audio-control" type="button" data-action="audio-previous" aria-label="Previous track" title="Previous track"><svg class="icon" aria-hidden="true"><use href="#i-chevron"></use></svg></button>
+          <button class="audio-control audio-toggle" type="button" data-action="audio-toggle" aria-label="Play" title="Play"><svg class="icon" aria-hidden="true"><use href="#i-play"></use></svg></button>
+          <button class="audio-control" type="button" data-action="audio-next" aria-label="Next track" title="Next track"><svg class="icon" aria-hidden="true"><use href="#i-chevron"></use></svg></button>
+          <button class="audio-control" type="button" data-action="audio-repeat" aria-label="Repeat off" aria-pressed="false" title="Repeat off"><svg class="icon" aria-hidden="true"><use href="#i-repeat"></use></svg></button>
+        </div>
+        <div class="audio-progress">
+          <span id="audio-current-time">0:00</span>
+          <input id="audio-seek" type="range" min="0" max="1000" value="0" aria-label="Seek through track" disabled>
+          <span id="audio-duration">0:00</span>
+        </div>
+      </div>
+      <div class="audio-actions">
+        <label class="audio-volume"><svg class="icon" aria-hidden="true"><use href="#i-volume"></use></svg><input id="audio-volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"></label>
+        <button class="audio-control" type="button" data-action="queue-toggle" aria-label="Show queue" aria-expanded="false" title="Show queue"><svg class="icon" aria-hidden="true"><use href="#i-list"></use></svg></button>
+        <button class="audio-control" type="button" data-action="audio-stop" aria-label="Stop music and clear queue" title="Stop and clear queue"><svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg></button>
+      </div>
+      <audio id="audio-player" preload="metadata" referrerpolicy="no-referrer" aria-hidden="true"></audio>
+      <div class="music-queue hidden" id="music-queue" role="region" aria-labelledby="queue-title">
+        <h2 id="queue-title">Up next</h2>
+        <ol id="music-queue-list"></ol>
+      </div>
+    </section>
+
+    <dialog class="modal connect-modal" id="connect-modal" aria-labelledby="connect-title">
+      <button class="icon-button modal-close" type="button" data-action="close-modal" aria-label="Close"><svg class="icon"><use href="#i-close"></use></svg></button>
+      <div class="modal-kicker"><span class="status-pulse"></span> YOUR PRIVATE CINEMA</div>
+      <h2 id="connect-title">Bring your library<br>into <span>orbit.</span></h2>
+      <p class="modal-lead">Connect to your Jellyfin server. Your library stays yours — NOVA talks directly to your server.</p>
+      <form id="connect-form">
+        <label class="field-label" for="server-url">SERVER ADDRESS</label>
+        <input class="text-field" id="server-url" name="server" type="url" placeholder="https://jellyfin.example.com" required autocomplete="url" spellcheck="false">
+        <details class="connection-help"><summary>Connection troubleshooting</summary><p>NOVA connects directly from this browser. Use an HTTPS Jellyfin address on GitHub Pages, and ask your server administrator to allow the NOVA site origin in Jellyfin's CORS settings.</p></details>
+        <div class="field-row">
+          <div class="field-column"><label class="field-label" for="username">USERNAME</label><input class="text-field" id="username" name="username" placeholder="Your Jellyfin username" required autocomplete="username"></div>
+          <div class="field-column"><label class="field-label" for="password">PASSWORD</label><input class="text-field" id="password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password"></div>
+        </div>
+        <label class="remember-row"><input id="remember-device" type="checkbox"><span>Remember this device</span><span class="remember-hint">Stores your access token in this browser</span></label>
+        <p class="form-error hidden" id="connect-error" role="alert"></p>
+        <button class="button button-primary connect-submit" type="submit"><span>Connect to Jellyfin</span><svg class="icon"><use href="#i-arrow"></use></svg></button>
+      </form>
+      <div class="privacy-note"><svg class="icon"><use href="#i-info"></use></svg><span>Your password is only sent to your server. It is never stored by NOVA.</span></div>
+      <button class="disconnect-button hidden" id="disconnect-button" type="button" data-action="disconnect">Disconnect this server</button>
+    </dialog>
+
+    <dialog class="modal detail-modal" id="detail-modal" aria-label="Media details">
+      <button class="icon-button detail-close" type="button" data-action="close-detail" aria-label="Close"><svg class="icon"><use href="#i-close"></use></svg></button>
+      <div id="detail-content"></div>
+    </dialog>
+
+    <dialog class="player-modal" id="player-modal" aria-label="Video player">
+      <button class="icon-button player-close" type="button" data-action="close-player" aria-label="Close player"><svg class="icon"><use href="#i-close"></use></svg></button>
+      <video id="video-player" controls playsinline preload="metadata"></video>
+      <div class="player-caption" id="player-caption"></div>
+    </dialog>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  </body>
+</html>
