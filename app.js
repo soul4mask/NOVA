@@ -327,21 +327,70 @@ function shelf(title, items, options = {}) {
 }
 
 function disconnectedHome() {
-  const showcase = demoItems.slice(1, 7);
   homeView.innerHTML = `
-    <section class="hero">
-      <img class="hero-image" src="${demoArtwork(demoItems[0], true)}" alt="" fetchpriority="high">
-      <div class="hero-content">
-        <p class="eyebrow"><span class="eyebrow-line"></span> A NEW WAY TO WATCH</p>
-        <h1>Your library.<br><span>Your orbit.</span></h1>
-        <p class="hero-copy">All the films, series, and stories you love — together in one thoughtfully made space. Yours, and yours alone.</p>
-        <div class="hero-actions"><button class="button button-primary" type="button" data-action="connect">Connect your Jellyfin ${icon("arrow")}</button><button class="button button-secondary" type="button" data-action="how-it-works">${icon("info")} How it works</button></div>
+    <header class="landing-header">
+      <a class="landing-brand" href="#" aria-label="NOVA home"><span class="brand-mark">${icon("spark")}</span>NOVA</a>
+      <nav class="landing-nav" aria-label="Page navigation">
+        <a href="#features">Features</a>
+        <a href="#privacy">Your privacy</a>
+      </nav>
+      <button class="button button-primary landing-connect" type="button" data-action="connect">Connect Jellyfin ${icon("arrow")}</button>
+    </header>
+    <section class="landing-hero">
+      <div class="landing-copy">
+        <p class="landing-kicker"><span></span> YOUR MEDIA, YOUR SPACE</p>
+        <h1>A more personal<br>way to enjoy<br><em>your library.</em></h1>
+        <p class="landing-description">NOVA brings your movies, series, and music together in one thoughtful place — powered by the Jellyfin server you choose.</p>
+        <div class="landing-actions">
+          <button class="button button-primary" type="button" data-action="connect">Connect your server ${icon("arrow")}</button>
+          <a class="landing-text-link" href="#features">Get to know NOVA <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="landing-requirement">${icon("server")} You'll need a Jellyfin server to get started.</p>
       </div>
-      <div class="hero-aside"><span>✦</span> YOUR PERSONAL CINEMA</div>
+      <div class="landing-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit-core"><span class="orbit-star">${icon("spark")}</span></div>
+        <span class="orbit-label orbit-label-top">YOUR COLLECTION</span>
+        <span class="orbit-label orbit-label-bottom">RIGHT WHERE IT BELONGS</span>
+      </div>
     </section>
-    <div class="demo-banner">${icon("spark")} These are preview titles, not your library. <button type="button" data-action="connect">Connect to see your own</button></div>
-    ${shelf("A little inspiration", showcase, { subtitle: "A preview of what's possible in your orbit" })}
-    ${shelf("Make it your own", demoItems.slice(0, 5))}
+    <section class="landing-features" id="features">
+      <div class="landing-section-heading">
+        <p class="landing-kicker"><span></span> MADE FOR YOUR LIBRARY</p>
+        <h2>Everything you love.<br><em>Nothing you don't.</em></h2>
+      </div>
+      <div class="landing-feature-grid">
+        <article class="landing-feature">
+          <span class="landing-feature-icon">${icon("film")}</span>
+          <h3>Stories, ready when you are.</h3>
+          <p>Find your films and series, pick up where you left off, and keep the favorites you want close.</p>
+        </article>
+        <article class="landing-feature">
+          <span class="landing-feature-icon">${icon("music")}</span>
+          <h3>Your music, in its own rhythm.</h3>
+          <p>Browse artists, albums, and playlists, then shape the queue around the moment.</p>
+        </article>
+        <article class="landing-feature">
+          <span class="landing-feature-icon">${icon("server")}</span>
+          <h3>Direct from your server.</h3>
+          <p>NOVA connects your browser straight to your Jellyfin server. Your media stays on your server, not ours.</p>
+        </article>
+      </div>
+    </section>
+    <section class="landing-privacy" id="privacy">
+      <div class="privacy-orbit" aria-hidden="true">${icon("spark")}</div>
+      <div>
+        <p class="landing-kicker"><span></span> PRIVATE BY DESIGN</p>
+        <h2>Your library stays <em>yours.</em></h2>
+        <p>There’s no NOVA account and no NOVA media hosting. Sign in with your Jellyfin server; your password is only sent to that server. Remembering this device stores an access token in this browser.</p>
+      </div>
+      <button class="button button-secondary" type="button" data-action="connect">Connect securely ${icon("arrow")}</button>
+    </section>
+    <footer class="landing-footer">
+      <a class="landing-brand" href="#" aria-label="NOVA home"><span class="brand-mark">${icon("spark")}</span>NOVA</a>
+      <p>An independent community client. Not affiliated with the Jellyfin project.</p>
+    </footer>
   `;
 }
 
@@ -1593,6 +1642,7 @@ async function connect(event) {
 
 function updateProfile() {
   const connected = Boolean(state.session);
+  document.body.classList.toggle("public-landing", !connected);
   document.querySelector("#connection-dot").classList.toggle("online", connected);
   document.querySelector("#server-button-title").textContent = connected ? "Connected" : "Connect server";
   document.querySelector("#server-button-subtitle").textContent = connected ? state.session.server.replace(/^https?:\/\//, "") : "Bring your library home";
